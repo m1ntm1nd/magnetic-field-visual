@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt 
-
+import numpy as np
 def order(sentence):
     words = list(sentence.split(' '))
     ans = words.copy()
@@ -9,37 +9,67 @@ def order(sentence):
                 ans[int(symbol)-1] = word
     return ans
 
-def start_guide():
-  print("Enter how many electric charges to emplace: (to see example type 0)")
-  n = int(input())
-  if n == 0:
-    return [[-60, 0, 10**(-9),1],[60, 0, -10**(-9),1]]
-  ans = []
-  for i in range(n):
-    print("Type x_coord, y_coord, (in range |150|) and sign of charge (+ or - ) in format (x y +)")
-    data = list(input().split(' '))
-    if data[2] == '+':
-      data[2] = 10**(-9)
-    else:
-      data[2] = -10**(-9)
-    data.append(1)
-    ans.append(data)
-  return ans
+class Provod(object):
+  def __init__(self, pos = [0,0], power=[100,100]):
+    self.pos = pos
+
+    self.power = power
+
+def find_angle(dot_x, dot_y, current_x, current_y):
+  y = abs(dot_y - current_y)
+  x = abs(dot_x - current_x)
+  sin_a = y/(np.sqrt(x**2+y**2))
+  return np.arcsin(sin_a)  #/np.pi*180
+
+
+def find_c(_):
+  pass
+
+def calc_power(power,distance):
+  
 
 
 def main():
-    print(start_guide())
-    # dev_x = [1 , 10, 100, 1000]
-    # dev_y = [10 , 25, 50, 125]
-    # dev_y_2 = [100 , 250, 500, 1250]
-    # plt.plot(dev_x, dev_y,label="eblo")
-    # plt.plot(dev_x, dev_y_2,label="tablo")
-    # # plt.legend(['Ebloids', 'Tabloids'])
-    # plt.xlabel("lol")
-    # plt.ylabel("kek")
-    # plt.title("idi nahyi")  
-    # plt.show()
-    # pass
+    size = 1000
+    plt.figure(dpi=150)
+    plt.xlim(-(size), (size))
+    plt.ylim(-(size), (size))
+    plt.grid()
+
+
+   
+    #plt.plot([0,0], [10,10], marker = 'o')
+    # x_coord_1 = int(input("Enter x coord "))
+    # y_coord_1 = int(input("Enter y coord "))
+    # provod1 = Provod([x_coord_1,y_coord_1])
+    # plt.scatter(provod1.pos[0],provod1.pos[1], s=5)
+    # x_coord_2 = int(input("Enter x coord "))
+    # y_coord_2 = int(input("Enter y coord "))
+    # provod2 = Provod([x_coord_2,y_coord_2])
+    # plt.scatter(provod2.pos[0],provod2.pos[1], s=5)
+    #start_point_1 = [provod1.pos[0]+10,provod1.pos[1]]
+    # x1, y1 = [-1, 12], [1, 4]
+    # x2, y2 = [1, 10], [3, 2]
+    # plt.plot(x1, y1, marker = 'o')
+    # #plt.scatter(0,0,)
+    # #случай с сонаправленными токами
+    # theta = np.linspace(0, 2*np.pi, 100)
+    # start_len = 10
+    # size2 = size //10
+    # alpha = 50
+    # while size*10 > start_len:
+    #   for i in theta:
+    #     plt.plot(start_len*np.cos(theta),(start_len-alpha)*np.sin(theta),'--',linewidth=0.6)
+    #   start_len *= 1.5
+    # start_len = 10
+    
+    # # while size*10 > start_len:
+    # #   for i in theta:
+    # #     plt.plot((start_len*np.cos(theta)+alpha),start_len*np.sin(theta),'r',linewidth=0.6)
+    # #   start_len *= 1.5
+    #print(x_coord_1,y_coord_1)
+    plt.show()
+
 
 
 if __name__ == "__main__":
